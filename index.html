@@ -94,7 +94,7 @@
   .badge--own { background: var(--paper-2); color: var(--body-c); }
   .badge--own::before { background: var(--graphite); }
 
-  .photo img { border-radius: calc(var(--r-card) - 3px); filter: grayscale(1) contrast(1.05); aspect-ratio: 4 / 3; object-fit: cover; }
+  .photo img { display: block; width: 100%; height: auto; border-radius: calc(var(--r-card) - 3px); filter: grayscale(1) contrast(1.05); aspect-ratio: 4 / 3; object-fit: cover; }
 
   footer.site { padding-block: 3rem; background: var(--graphite); color: var(--panel-body); }
   footer.site p { font-size: max(var(--step-1), 1.1rem); }
@@ -103,12 +103,22 @@
   .hero__in { min-width: 0; }
   .hero__copy .btns { margin-top: clamp(1.6rem, 3vw, 2.4rem); }
 
-  /* header: two brand marks */
+  /* header: navy ground so both marks read clearly. The Big Rock Power PNG
+     carries its own opaque white plate; on a light header site.css's inherited
+     .head__mark filter (built for the Energy+ mark) inverted that white plate
+     to black. On navy, the plate reads as an intentional badge and needs no
+     filter; the Energy+ mark (white artwork) needs none either. */
+  .head { background: var(--graphite); border-bottom: 1px solid var(--graphite-rule); backdrop-filter: none; }
   .head__in { gap: 1rem; }
-  .head__mark img { width: auto; height: 34px; }
+  .head__mark {
+    display: inline-flex; align-items: center; background: #fff; border-radius: 6px;
+    padding: 0.35rem 0.7rem; box-shadow: var(--shadow-card);
+  }
+  .head__mark img { width: auto; height: 26px; filter: none; }
+  .head.is-clear .head__mark img { filter: none; }
   .head__partner { display: flex; align-items: center; gap: 0.6rem; }
-  .head__partner span { font-family: var(--font-mono); font-size: 0.85rem; color: var(--faint); white-space: nowrap; }
-  .head__partner img { height: 20px; width: auto; opacity: 0.85; }
+  .head__partner span { font-family: var(--font-mono); font-size: 0.85rem; color: var(--panel-faint); white-space: nowrap; }
+  .head__partner img { height: 20px; width: auto; filter: none; }
   @media (max-width: 560px) { .head__partner span { display: none; } }
 
   /* streams graphic */
@@ -145,7 +155,7 @@
     <div class="wrap hero__in">
       <div class="hero__copy">
         <p class="label">Town of Cardston, Alberta &middot; Prepared September 2026</p>
-        <h1 id="hero-h">The bill you already pay can fix the buildings that cause it.</h1>
+        <h1 id="hero-h">The extra you're paying can fix what's causing it.</h1>
         <p class="hero__lede">Every month the arena, the pool, and other town buildings cost more than they should to run. That extra cost can pay for fixing it instead of a new line in the budget.</p>
         <div class="btns">
           <a class="btn btn--lg" href="#ask">Book a 15 minute call</a>
@@ -341,7 +351,7 @@
       <div class="grid grid--2">
         <div class="plain-card">
           <div class="photo" style="margin-bottom:1rem;">
-            <img src="assets/img/cliff-lab.jpg" alt="Cliff Suljak, Chief Technical Engineer, in a materials testing laboratory" loading="lazy">
+            <img src="assets/img/cliff-lab.jpg" alt="Cliff Suljak, Chief Technical Engineer, in a materials testing laboratory" width="640" height="480">
           </div>
           <p class="fine">Cliff Suljak &middot; Chief Technical Engineer</p>
         </div>
