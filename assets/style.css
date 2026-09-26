@@ -1,0 +1,170 @@
+/* Town of Cardston proposal -- clean rebuild, own stylesheet.
+   One typeface (Inter), one accent color (Big Rock navy), mostly white and
+   light grey. No component borrowed from the old site.css. */
+
+:root {
+  --navy: #26306c;
+  --navy-dark: #1b2350;
+  --navy-tint-1: #6d76a4;
+  --navy-tint-2: #aeb4cd;
+  --ink: #1d1d1f;
+  --body: #3a3a3c;
+  --faint: #6e6e73;
+  --bg: #ffffff;
+  --tint: #f5f5f7;
+  --line: #d7d7db;
+  --radius: 20px;
+  --wrap: 1120px;
+  --wrap-narrow: 760px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--body);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3 {
+  color: var(--ink);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2.3rem, 6.2vw, 4.4rem); }
+h2 { font-size: clamp(1.7rem, 4vw, 2.6rem); font-weight: 700; }
+h3 { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; }
+
+p { max-width: 62ch; }
+a { color: var(--navy); }
+strong { color: var(--ink); font-weight: 700; }
+
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 2.5rem); }
+.wrap--narrow { max-width: var(--wrap-narrow); }
+.center { text-align: center; margin-inline: auto; }
+
+.section { padding-block: clamp(3.5rem, 9vw, 6.5rem); }
+.section--tint { background: var(--tint); }
+
+.eyebrow {
+  font-size: 0.85rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--faint); margin-bottom: 0.85rem;
+}
+
+.lede { font-size: 1.25rem; color: var(--body); margin-top: 1rem; }
+.section > .wrap > h2 + p, .section-head p { margin-top: 1rem; font-size: 1.15rem; }
+
+.section-head { margin-bottom: clamp(2rem, 5vw, 3rem); }
+
+/* buttons and links */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--navy); color: #fff; font-weight: 600; font-size: 1.05rem;
+  padding: 1rem 2.1rem; border-radius: 999px; text-decoration: none; white-space: nowrap;
+  transition: background 160ms ease;
+}
+.btn:hover { background: var(--navy-dark); }
+.link-arrow { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; color: var(--navy); text-decoration: none; }
+.link-arrow:hover { text-decoration: underline; }
+
+.actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2.25rem; }
+
+/* header */
+.header { padding-block: 1.35rem; border-bottom: 1px solid var(--line); }
+.header__in { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.brand-mark img { height: 26px; width: auto; display: block; }
+.partner { display: flex; align-items: center; gap: 0.55rem; }
+.partner span { font-size: 0.8rem; font-weight: 500; color: var(--faint); white-space: nowrap; }
+.partner img { height: 15px; width: auto; filter: invert(1); opacity: 0.82; display: block; }
+@media (max-width: 480px) { .partner span { display: none; } }
+
+/* hero */
+.hero { padding-block: clamp(3.5rem, 10vw, 6rem) clamp(2.5rem, 6vw, 4rem); text-align: center; }
+.hero h1 { max-width: 16ch; margin-inline: auto; }
+.hero .lede { max-width: 52ch; margin-inline: auto; font-size: 1.3rem; }
+
+/* the one number */
+.stat { text-align: center; padding-block: clamp(2.5rem, 6vw, 4rem); }
+.stat__num { font-size: clamp(3.2rem, 11vw, 6rem); font-weight: 800; color: var(--navy); letter-spacing: -0.03em; line-height: 1; }
+.stat__label { margin-top: 0.75rem; font-size: 1.25rem; color: var(--ink); font-weight: 600; max-width: 34ch; margin-inline: auto; text-wrap: balance; }
+.stat__fine { margin-top: 1rem; font-size: 0.95rem; color: var(--faint); max-width: 46ch; margin-inline: auto; }
+.stat__fine a { color: var(--faint); text-decoration: underline; }
+
+/* three problem cards */
+.cards3 { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-top: 0; }
+@media (min-width: 860px) { .cards3 { grid-template-columns: repeat(3, 1fr); } }
+.card { background: var(--bg); border-radius: var(--radius); padding: clamp(1.5rem, 3vw, 2rem); }
+.section--tint .card { background: var(--bg); }
+.card h3 { white-space: normal; }
+.card p { margin-top: 0.6rem; font-size: 1.05rem; }
+
+/* cash flow chart */
+.chart { margin-top: clamp(2rem, 5vw, 3rem); display: flex; justify-content: center; align-items: flex-end;
+  gap: clamp(2.5rem, 9vw, 6rem); flex-wrap: wrap; }
+.bar-col { display: flex; flex-direction: column; align-items: center; width: 150px; }
+.bar-track { width: 84px; display: flex; flex-direction: column-reverse; border-radius: 10px; overflow: hidden; }
+.bar-seg { width: 100%; }
+.bar-seg--today { height: 240px; background: var(--line); }
+.bar-seg--payment { height: 140px; background: var(--navy); }
+.bar-seg--e1 { height: 34px; background: var(--navy); opacity: 0.72; }
+.bar-seg--e2 { height: 34px; background: var(--navy); opacity: 0.5; }
+.bar-seg--e3 { height: 34px; background: var(--navy); opacity: 0.3; }
+.bar-title { margin-top: 1.1rem; font-weight: 700; font-size: 1.05rem; color: var(--ink); text-align: center; }
+.bar-sub { margin-top: 0.25rem; font-size: 0.9rem; color: var(--faint); text-align: center; max-width: 20ch; }
+
+.legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem 1.75rem; margin-top: 2.25rem; }
+.legend span { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; color: var(--body); white-space: nowrap; }
+.legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; flex: none; }
+
+.caption { text-align: center; margin-top: 1.5rem; font-size: 0.95rem; color: var(--faint); }
+
+/* plan steps */
+.steps3 { display: grid; grid-template-columns: 1fr; gap: 2.25rem; margin-top: 0; }
+@media (min-width: 700px) { .steps3 { grid-template-columns: repeat(3, 1fr); } }
+.step__num { font-size: clamp(2.4rem, 6vw, 3.2rem); font-weight: 800; color: var(--navy); line-height: 1; }
+.step h3 { margin-top: 0.85rem; }
+.step p { margin-top: 0.45rem; font-size: 1.05rem; }
+
+/* funding two-column list */
+.funding-cols { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-top: 0; }
+@media (min-width: 760px) { .funding-cols { grid-template-columns: 1fr 1fr; } }
+.funding-col h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+.flist { list-style: none; }
+.flist li { padding-block: 1rem; border-top: 1px solid var(--line); }
+.flist li:first-child { border-top: 0; }
+.flist .name { font-weight: 600; color: var(--ink); display: block; font-size: 1.05rem; }
+.flist .status { display: block; margin-top: 0.2rem; font-size: 0.95rem; color: var(--faint); }
+.funding-note { margin-top: 2.25rem; font-size: 0.95rem; color: var(--faint); max-width: 70ch; }
+
+/* diagnostician */
+.cliff { display: grid; grid-template-columns: 1fr; gap: 1.75rem; align-items: center; margin-top: 0; }
+@media (min-width: 700px) { .cliff { grid-template-columns: 260px 1fr; gap: 2.75rem; } }
+.cliff img { border-radius: var(--radius); filter: grayscale(1) contrast(1.05); width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.cliff-cap { margin-top: 0.6rem; font-size: 0.9rem; color: var(--faint); }
+.cliff-body p { margin-top: 0.75rem; font-size: 1.1rem; }
+
+/* final CTA */
+.final-cta { text-align: center; }
+.final-cta h2 { max-width: 20ch; margin-inline: auto; }
+.final-cta .fine { margin-top: 1.25rem; font-size: 0.95rem; color: var(--faint); }
+
+/* sources */
+.sources { font-size: 0.85rem; color: var(--faint); }
+.sources h2 { font-size: 1.2rem; color: var(--ink); }
+.sources ul { list-style: disc; padding-left: 1.2rem; margin-top: 1rem; }
+.sources li { margin-top: 0.55rem; line-height: 1.6; }
+.sources a { color: var(--faint); }
+
+footer.site { border-top: 1px solid var(--line); padding-block: 2.5rem; }
+footer.site p { font-size: 0.95rem; color: var(--faint); }
+
+@media (max-width: 719.9px) {
+  html, body { overflow-x: hidden; max-width: 100%; }
+}
