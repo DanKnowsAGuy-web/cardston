@@ -4,14 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Energy Plus proposal for the Town of Cardston, Alberta, prepared in partnership with Big Rock Power and Manitou Energy.">
+<meta name="description" content="Energy Plus proposal for the Town of Cardston, Alberta, prepared in partnership with Big Rock Power.">
 <title>Energy Plus &middot; Prepared for the Town of Cardston</title>
 <link rel="stylesheet" href="assets/fonts/report-fonts.css">
-<link rel="stylesheet" href="assets/site.css?v=20260925a">
+<link rel="stylesheet" href="assets/site.css?v=20260926a">
 <style>
-  /* This page's own widgets only: bands, cards, the savings chart, and the
-     small furniture site.css does not define. Every value below is a
-     var(--...) from site.css. No literal color or font-family past this point. */
+  /* RE-SKIN: Big Rock Power brand tokens only. Layout, motion, and disclosure
+     wiring inherited unchanged from site.css. See research-notes.md for the
+     source of these colors. */
+  :root {
+    --graphite: #26306c;
+    --graphite-2: #333f8f;
+    --panel-ink: #ffffff;
+    --panel-body: #c7cce3;
+    --panel-faint: #9aa1cf;
+    --panel-btn-bg: #ffffff;
+    --panel-btn-fg: #26306c;
+    --amber: #ec5d3c;
+    --amber-ink: #8a2f14;
+    --amber-wash: #fde7e1;
+    --link: #26306c;
+  }
 
   .label {
     font-family: var(--font-mono); font-size: 1rem; font-weight: 600;
@@ -23,13 +36,10 @@
   .fine, .label { font-size: 1rem; line-height: 1.5; }
   .hero__lede { font-size: 1.4rem; max-width: 46ch; }
 
-  main h2 { font-size: var(--step-3); max-width: 26ch; }
+  main h2 { font-size: var(--step-3); max-width: 24ch; }
   main .wrap.narrow p:not(.fine) { font-size: max(var(--step-1), 1.2rem); line-height: 1.55; max-width: 68ch; }
   main .wrap.narrow p + p { margin-top: 1rem; }
   main .wrap.narrow h2 + p { margin-top: 1.4rem; }
-  main .wrap.narrow ul { margin-top: 1.2rem; padding-left: 1.3rem; }
-  main .wrap.narrow ul li { margin-top: 0.6rem; }
-  main .wrap.narrow ul li::marker { color: var(--faint); }
 
   .wrap.narrow { max-width: calc(var(--narrow) + 2 * clamp(1.25rem, 4vw, 2.5rem)); }
 
@@ -37,7 +47,6 @@
   .band--alt { background: var(--card); border-block: 1px solid var(--rule-soft); }
 
   .fine { font-family: var(--font-mono); font-size: 1rem; color: var(--faint); margin-top: 0.9rem; }
-  .fine .warn { color: var(--amber-ink); font-style: italic; }
 
   .btns { display: flex; flex-wrap: wrap; gap: 1.1rem; margin-top: clamp(1.6rem, 3vw, 2.4rem); }
   .textlink { font-size: 1.1rem; min-height: 56px; display: inline-flex; align-items: center; }
@@ -48,27 +57,16 @@
   @media (min-width: 700px) { .grid--2 { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 860px) { .grid--3 { grid-template-columns: 1fr 1fr 1fr; } }
 
-  .plain-card, .callout { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r-card);
+  .plain-card { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r-card);
     padding: clamp(1.25rem, 2.5vw, 1.75rem); }
-  .plain-card p, .callout p { font-size: max(var(--step-1), 1.2rem); line-height: 1.5; }
-  .plain-card .fine, .callout .fine { margin-top: 1rem; }
-  .plain-card h3, .callout h3 { font-size: var(--step-1); margin-bottom: 0.5rem; }
-  .plain-card .num { font-family: var(--font-sans); font-weight: 700; font-size: var(--step-2);
-    color: var(--graphite); display: block; margin-bottom: 0.3rem; }
+  .plain-card p { font-size: max(var(--step-1), 1.15rem); line-height: 1.5; }
+  .plain-card .fine { margin-top: 1rem; }
+  .plain-card h3 { font-size: var(--step-1); margin-bottom: 0.5rem; }
 
   .steps { list-style: none; margin-top: clamp(1.8rem, 4vw, 3rem); padding: 0; counter-reset: step; }
   .steps > li { border-top: 1px solid var(--rule); padding: 1.5rem 0; }
-  .step-num { font-family: var(--font-mono); font-weight: 600; font-size: var(--step-1); color: var(--faint); }
   .steps h3 { font-size: var(--step-1); margin-top: 0.5rem; }
   .steps p { margin-top: 0.5rem; font-size: max(var(--step-1), 1.2rem); }
-
-  .phaselist { list-style: none; padding: 0; margin-top: 1.5rem; }
-  .phaselist li { display: flex; gap: 1rem; padding: 0.9rem 0; border-top: 1px solid var(--rule); }
-  .phaselist li:first-child { border-top: 0; }
-  .phaselist .dot { flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: var(--graphite);
-    margin-top: 0.55rem; }
-  .phaselist p { margin: 0; font-size: max(var(--step-1), 1.2rem); }
-  .phaselist strong { color: var(--ink); }
 
   .chartcard { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r-card);
     box-shadow: var(--shadow-card); padding: clamp(1.5rem, 3vw, 2.5rem); margin-top: 2rem; }
@@ -78,14 +76,25 @@
     font-size: 1rem; color: var(--faint); }
   .chart-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
 
-  .wtable { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
-  .wtable th, .wtable td { text-align: left; padding: 0.7rem 0.6rem 0.7rem 0; border-bottom: 1px solid var(--rule);
+  .wtable-wrap { max-width: 100%; overflow-x: auto; }
+  .wtable { width: 100%; border-collapse: collapse; margin-top: 1.5rem; table-layout: fixed; }
+  .wtable th, .wtable td { word-wrap: break-word; overflow-wrap: break-word; }
+  .wtable th, .wtable td { text-align: left; padding: 0.8rem 0.7rem 0.8rem 0; border-bottom: 1px solid var(--rule);
     font-size: max(var(--step-1), 1.1rem); vertical-align: top; }
   .wtable th { font-family: var(--font-mono); font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase;
     color: var(--faint); font-weight: 600; border-bottom: 1px solid var(--ink); }
-  .wtable tr.total td { border-top: 2px solid var(--ink); border-bottom: 0; font-weight: 700; }
-  .wtable .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink); }
-  .wtable .num.money { color: var(--amber-ink); font-weight: 600; }
+
+  .badge { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-mono);
+    font-size: 0.95rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 999px; white-space: nowrap; }
+  .badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .badge--open { background: var(--amber-wash); color: var(--amber-ink); }
+  .badge--open::before { background: var(--amber); }
+  .badge--closed { background: var(--paper-2); color: var(--faint); }
+  .badge--closed::before { background: var(--faint); }
+  .badge--own { background: var(--paper-2); color: var(--body-c); }
+  .badge--own::before { background: var(--graphite); }
+
+  .photo img { border-radius: calc(var(--r-card) - 3px); filter: grayscale(1) contrast(1.05); aspect-ratio: 4 / 3; object-fit: cover; }
 
   footer.site { padding-block: 3rem; background: var(--graphite); color: var(--panel-body); }
   footer.site p { font-size: max(var(--step-1), 1.1rem); }
@@ -94,14 +103,26 @@
   .hero__in { min-width: 0; }
   .hero__copy .btns { margin-top: clamp(1.6rem, 3vw, 2.4rem); }
 
-  .hero-graphic { margin-top: clamp(2rem, 5vw, 3rem); max-width: 520px; opacity: 0.9; }
+  /* header: two brand marks */
+  .head__in { gap: 1rem; }
+  .head__mark img { width: auto; height: 34px; }
+  .head__partner { display: flex; align-items: center; gap: 0.6rem; }
+  .head__partner span { font-family: var(--font-mono); font-size: 0.85rem; color: var(--faint); white-space: nowrap; }
+  .head__partner img { height: 20px; width: auto; opacity: 0.85; }
+  @media (max-width: 560px) { .head__partner span { display: none; } }
+
+  /* streams graphic */
+  .streams-svg { width: 100%; height: auto; display: block; }
+  .stream-detail h3 { font-size: var(--step-0); }
+  .stream-detail p { font-size: 1.05rem; }
 
   @media (max-width: 719.9px) {
     html, body { overflow-x: hidden; max-width: 100%; }
     img, picture, video, svg { max-width: 100%; height: auto; }
     .head, .head__in { width: 100%; max-width: 100%; min-width: 0; padding-left: 16px; padding-right: 16px; box-sizing: border-box; }
-    .wtable { font-size: 0.95rem; }
+    .wtable { font-size: 0.92rem; }
     .wtable th:nth-child(4), .wtable td:nth-child(4) { display: none; }
+    .wtable th:nth-child(2), .wtable td:nth-child(2) { display: none; }
   }
 </style>
 </head>
@@ -109,230 +130,231 @@
 
 <header class="head" id="head">
   <div class="wrap head__in">
-    <a class="head__mark" href="#top" aria-label="Energy Plus, home"><img src="assets/img/energy-plus-logo.png" alt="Energy Plus" width="104" height="30"></a>
+    <a class="head__mark" href="#top" aria-label="Big Rock Power, home"><img src="assets/img/bigrockpower-logo.png" alt="Big Rock Power" height="34"></a>
+    <div class="head__partner">
+      <span>In partnership with</span>
+      <img src="assets/img/energy-plus-logo.png" alt="Energy Plus" height="20">
+    </div>
   </div>
 </header>
 
 <main>
 
-  <!-- 1. Hero -->
+  <!-- 1. Hero: the town's decision maker is the hero, the message is cash flow -->
   <section class="hero" id="top" aria-labelledby="hero-h">
     <div class="wrap hero__in">
       <div class="hero__copy">
         <p class="label">Town of Cardston, Alberta &middot; Prepared September 2026</p>
-        <h1 id="hero-h">Lower energy bills at the arena and the pool. No capital budget required.</h1>
-        <p class="hero__lede">A savings-funded retrofit for Cardston's own facilities: the ice arena, the pool, the town office, water and wastewater. The work is paid for out of the energy it saves, not out of Cardston's capital plan. No grant to chase, no bond to issue, no line item to defend.</p>
+        <h1 id="hero-h">The bill you already pay can fix the buildings that cause it.</h1>
+        <p class="hero__lede">Every month the arena, the pool, and other town buildings cost more than they should to run. That extra cost can pay for fixing it instead of a new line in the budget.</p>
         <div class="btns">
-          <a class="btn btn--lg" href="#approach">See how it works</a>
-          <a class="textlink" href="#ask">Book a 15 minute call</a>
+          <a class="btn btn--lg" href="#ask">Book a 15 minute call</a>
+          <a class="textlink" href="#streams">See how the money moves</a>
         </div>
       </div>
-      <svg class="hero-graphic" viewBox="0 0 520 180" role="img" aria-label="A savings bar splitting into financed project cost and money returned to the town">
-        <line x1="0" y1="150" x2="520" y2="150" stroke="var(--graphite-rule)" stroke-width="1"/>
-        <text x="10" y="20" fill="var(--panel-faint)" font-family="var(--font-mono)" font-size="12">TODAY&#8217;S BILL</text>
-        <rect x="10" y="60" width="46" height="90" rx="3" fill="var(--panel-btn-bg)" opacity="0.9"/>
-        <rect x="66" y="82" width="46" height="68" rx="3" fill="var(--panel-btn-bg)" opacity="0.55"/>
-        <rect x="122" y="100" width="46" height="50" rx="3" fill="var(--panel-btn-bg)" opacity="0.3"/>
-
-        <line x1="200" y1="30" x2="200" y2="150" stroke="var(--graphite-rule)" stroke-width="1" stroke-dasharray="3 4"/>
-
-        <text x="220" y="20" fill="var(--panel-faint)" font-family="var(--font-mono)" font-size="12">PAYS THE PROJECT</text>
-        <rect x="220" y="90" width="46" height="60" rx="3" fill="var(--amber)"/>
-        <rect x="276" y="110" width="46" height="40" rx="3" fill="var(--panel-btn-bg)" opacity="0.9"/>
-
-        <text x="352" y="20" fill="var(--panel-faint)" font-family="var(--font-mono)" font-size="12">TOWN KEEPS THE REST</text>
-        <rect x="352" y="120" width="46" height="30" rx="3" fill="var(--panel-btn-bg)" opacity="0.9"/>
-        <rect x="408" y="105" width="46" height="45" rx="3" fill="var(--panel-btn-bg)" opacity="0.9"/>
-        <rect x="464" y="85" width="46" height="65" rx="3" fill="var(--panel-btn-bg)" opacity="0.9"/>
-      </svg>
     </div>
   </section>
 
-  <!-- 2. The problem -->
-  <section class="band" id="problem">
+  <!-- 2. The three savings streams: one strong visual -->
+  <section class="band" id="streams">
     <div class="wrap narrow">
-      <p class="label">The problem</p>
-      <h2>The arena and the pool are Cardston's two biggest energy users.</h2>
-      <p>In almost every small Alberta town, one building runs the compressors that make ice, and another heats water for swimming. Between them they carry more of the electricity and gas bill than every other municipal building combined.</p>
-      <p>Four things drive that cost at a facility like Charlie Cheesman Memorial Ice Arena and the Cardston Swimming Pool:</p>
-      <ul>
-        <li><strong>Ice plant refrigeration.</strong> The compressors that hold the ice sheet run nearly around the clock through the season and are typically the single largest electrical load in the building.</li>
-        <li><strong>Pool water and air heating.</strong> Pool water, deck air, and humidity control are usually heated by natural gas or electric resistance, running for the length of the swim season.</li>
-        <li><strong>Dehumidification.</strong> Ice and warm, moist pool air both fight condensation and air quality, and the equipment that manages it runs whenever the building is open.</li>
-        <li><strong>Demand charges.</strong> Electricity bills for a facility like this are not just about kilowatt hours used. A large share of the bill is set by the single highest 15 minute peak in the month, and in many Alberta rate structures that peak keeps costing the town for months afterward through a demand ratchet, whether or not the equipment runs that hard again.</li>
-      </ul>
-      <p class="fine">Cardston is one of only two towns in Alberta that own and operate their own municipal electrical distribution system, rather than being served by a wires company like FortisAlberta. <a href="#notes">Source and detail below.</a></p>
+      <p class="label">Where the money comes from</p>
+      <h2>Three streams. One number the town keeps.</h2>
+      <p>Illustrative, pending Cardston's own data. The shape of the math, not a quote.</p>
     </div>
-  </section>
-
-  <!-- 3. The approach -->
-  <section class="band--alt band" id="approach">
-    <div class="wrap narrow">
-      <p class="label">The approach</p>
-      <h2>Easy wins first. Nothing invented, everything measured.</h2>
-      <p>We start with data the town already has, not with a sales estimate.</p>
-
-      <div class="callout" style="margin-top:2rem;">
-        <h3>Phase 1: diagnostics</h3>
-        <p>Twelve months of interval electricity data (with the town's authorization) plus equipment nameplates from the ice plant, pool mechanical room, and HVAC systems. That is all we need to start. No site visit is required to begin, though one usually follows once the data points somewhere specific.</p>
-      </div>
-
-      <p style="margin-top:2.5rem;">From that diagnostic, the measures we expect to find room for, roughly in order of payback:</p>
-      <ul class="phaselist">
-        <li><span class="dot"></span><p><strong>Ice plant and refrigeration optimization.</strong> Head pressure control, condenser and evaporator performance, compressor sequencing and controls tuning. Usually the fastest payback in the building.</p></li>
-        <li><span class="dot"></span><p><strong>Heat recovery from the ice plant to the pool and domestic hot water.</strong> The ice plant rejects heat it currently throws away outdoors; that heat can preheat pool water and hot water instead of burning gas or electricity to make it twice. This is a well proven retrofit at other Canadian arena and pool complexes; see the case notes below.</p></li>
-        <li><span class="dot"></span><p><strong>HVAC and controls.</strong> Scheduling, setpoints, and dehumidification tuning across the arena and pool mechanical systems.</p></li>
-        <li><span class="dot"></span><p><strong>Power factor correction and demand management.</strong> Shaving and shifting the peaks that set the demand charge, which matters most under a ratchet-style rate.</p></li>
-        <li><span class="dot"></span><p><strong>Solar thermal for pool heating, where the site suits it.</strong> Cardston's pool operates seasonally, in the warmer months, which is favourable for solar thermal compared with a year-round indoor pool. Alberta winters are a real limit on solar thermal generally, so we don't count on it before the diagnostic confirms roof orientation, shading, and the pool's actual heating load. Suitability is confirmed by the diagnostics, not assumed up front.</p></li>
-      </ul>
-
-      <div class="callout" style="margin-top:2rem;">
-        <h3>Phase 2: deeper measures</h3>
-        <p>Once we're in and the first round of measures is running, Phase 2 looks at bigger equipment decisions, envelope work, and further electrification, with the town under no obligation to continue past Phase 1 if the numbers don't support it.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. Illustrative savings & financing -->
-  <section class="band" id="numbers">
-    <div class="wrap">
-      <p class="label">The numbers</p>
-      <h2>Illustrative only, pooled so the financed project clears the minimum size.</h2>
-      <p class="wrap narrow" style="padding:0; max-width:68ch;">A single small building rarely generates enough guaranteed savings to size a financed project above Energy Plus's minimum on its own. Pooling a handful of Cardston's own facilities into one project is what gets the project size over that line. The figures below are built from published, conservative benchmark ranges for arenas and pools, not from Cardston's actual bills. They exist to show the shape of the math, not the answer.</p>
-
+    <div class="wrap" style="margin-top:1.5rem;">
       <div class="chartcard">
-        <svg viewBox="0 0 720 300" role="img" aria-label="Bar chart: illustrative annual electricity cost and estimated savings for four pooled Cardston facilities, plus the combined total">
-          <!-- axis -->
-          <line x1="170" y1="20" x2="170" y2="240" stroke="var(--rule)" stroke-width="1"/>
-          <line x1="170" y1="240" x2="700" y2="240" stroke="var(--rule)" stroke-width="1"/>
-          <!-- rows: label, today bar (graphite), saved bar (amber) -->
-          <!-- Ice arena: today $58,000 saved $16,000 -->
-          <text x="0" y="52" fill="var(--body-c)" font-family="var(--font-sans)" font-size="14">Ice arena</text>
-          <rect x="170" y="40" width="290" height="16" rx="2" fill="var(--graphite)"/>
-          <text x="466" y="52" fill="var(--faint)" font-family="var(--font-mono)" font-size="12">$58,000/yr</text>
-          <rect x="170" y="60" width="80" height="16" rx="2" fill="var(--amber)"/>
-          <text x="256" y="72" fill="var(--amber-ink)" font-family="var(--font-mono)" font-size="12">$16,000 saved</text>
+        <svg class="streams-svg" viewBox="0 0 700 300" role="img" aria-label="Three savings streams, less energy overspend, less maintenance, and less equipment replacement, flowing together into money back every month">
+          <rect x="0" y="16" width="230" height="48" rx="6" fill="var(--graphite)"/>
+          <text x="18" y="46" fill="var(--panel-ink)" font-family="var(--font-sans)" font-weight="700" font-size="16">Less energy overspend</text>
 
-          <!-- Pool: today $34,000 saved $11,000 -->
-          <text x="0" y="112" fill="var(--body-c)" font-family="var(--font-sans)" font-size="14">Pool</text>
-          <rect x="170" y="100" width="170" height="16" rx="2" fill="var(--graphite)"/>
-          <text x="346" y="112" fill="var(--faint)" font-family="var(--font-mono)" font-size="12">$34,000/yr</text>
-          <rect x="170" y="120" width="55" height="16" rx="2" fill="var(--amber)"/>
-          <text x="231" y="132" fill="var(--amber-ink)" font-family="var(--font-mono)" font-size="12">$11,000 saved</text>
+          <rect x="0" y="126" width="230" height="48" rx="6" fill="var(--graphite)" opacity="0.82"/>
+          <text x="18" y="156" fill="var(--panel-ink)" font-family="var(--font-sans)" font-weight="700" font-size="16">Less maintenance</text>
 
-          <!-- Town office: today $12,000 saved $2,800 -->
-          <text x="0" y="172" fill="var(--body-c)" font-family="var(--font-sans)" font-size="14">Town office</text>
-          <rect x="170" y="160" width="60" height="16" rx="2" fill="var(--graphite)"/>
-          <text x="236" y="172" fill="var(--faint)" font-family="var(--font-mono)" font-size="12">$12,000/yr</text>
-          <rect x="170" y="180" width="14" height="16" rx="2" fill="var(--amber)"/>
-          <text x="190" y="192" fill="var(--amber-ink)" font-family="var(--font-mono)" font-size="12">$2,800 saved</text>
+          <rect x="0" y="236" width="230" height="48" rx="6" fill="var(--graphite)" opacity="0.64"/>
+          <text x="18" y="266" fill="var(--panel-ink)" font-family="var(--font-sans)" font-weight="700" font-size="16">Less equipment replacement</text>
 
-          <!-- Water/wastewater: today $22,000 saved $5,500 -->
-          <text x="0" y="212" fill="var(--body-c)" font-family="var(--font-sans)" font-size="14">Water &amp; wastewater</text>
-          <rect x="170" y="200" width="110" height="16" rx="2" fill="var(--graphite)"/>
-          <text x="286" y="212" fill="var(--faint)" font-family="var(--font-mono)" font-size="12">$22,000/yr</text>
-          <rect x="170" y="220" width="28" height="16" rx="2" fill="var(--amber)"/>
-          <text x="204" y="232" fill="var(--amber-ink)" font-family="var(--font-mono)" font-size="12">$5,500 saved</text>
+          <path d="M230,40 C 400,40 380,150 500,150" stroke="var(--rule)" stroke-width="2" fill="none"/>
+          <path d="M230,150 L 500,150" stroke="var(--rule)" stroke-width="2" fill="none"/>
+          <path d="M230,260 C 400,260 380,150 500,150" stroke="var(--rule)" stroke-width="2" fill="none"/>
 
-          <text x="0" y="266" fill="var(--ink)" font-family="var(--font-sans)" font-weight="700" font-size="15">Pooled total: about $126,000/yr today</text>
-          <text x="0" y="288" fill="var(--amber-ink)" font-family="var(--font-sans)" font-weight="700" font-size="15">About $35,000/yr in illustrative savings, enough to size a project well above the ~$50,000 minimum</text>
+          <rect x="500" y="100" width="200" height="100" rx="10" fill="var(--amber)"/>
+          <text x="600" y="142" text-anchor="middle" fill="var(--amber-ink)" font-family="var(--font-sans)" font-weight="700" font-size="18">Money back</text>
+          <text x="600" y="168" text-anchor="middle" fill="var(--amber-ink)" font-family="var(--font-mono)" font-size="14">every month</text>
         </svg>
-        <div class="chart-legend">
-          <span><i style="background:var(--graphite)"></i> Today's estimated annual electricity cost</span>
-          <span><i style="background:var(--amber)"></i> Illustrative annual savings at conservative benchmark rates</span>
-        </div>
-        <p class="fine" style="margin-top:1.25rem;">Illustrative financing multiple only: at a conservative 6 to 8 year savings-funded term, about $35,000/yr in savings could support a financed project in the rough range of $210,000 to $280,000, well above the ~$50,000 minimum project size. The actual multiple and term depend on the financing structure agreed with Cardston, and this is not a quote.</p>
       </div>
-
-      <table class="wtable">
-        <caption class="fine" style="margin-bottom:0.6rem;">How the illustrative range was built</caption>
-        <thead>
-          <tr><th>Facility</th><th>Benchmark used</th><th>Savings range applied</th><th>Note</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Ice arena</td><td>NRCan arena energy benchmarking: median about 2 GJ/m&sup2;/yr, refrigeration the largest single load</td><td class="num money">18&ndash;30%</td><td class="fine">Held at the low end here</td></tr>
-          <tr><td>Pool</td><td>Ice plant heat recovery case studies (Okotoks, Chilliwack, Hope, BC/AB)</td><td class="num money">15&ndash;32%</td><td class="fine">Seasonal, outdoor pool</td></tr>
-          <tr><td>Town office</td><td>Typical small-office HVAC/controls tune-up range</td><td class="num money">10&ndash;20%</td><td class="fine">Conservative end used</td></tr>
-          <tr><td>Water &amp; wastewater</td><td>Typical pumping/controls optimization range</td><td class="num money">15&ndash;30%</td><td class="fine">Conservative end used</td></tr>
-        </tbody>
-      </table>
-      <p class="fine">Illustrative &mdash; to be confirmed with Cardston's interval data. Every dollar figure and percentage above is a modeled example built from the published benchmarks and case studies in the <a href="#sources">sources listed below</a>, not a reading of Cardston's actual utility bills. We have not seen Cardston's bills. Real figures replace these in Phase 1.</p>
+      <div class="grid grid--3" style="margin-top:2rem;">
+        <div class="plain-card stream-detail">
+          <h3>Energy</h3>
+          <p>Equipment running longer or harder than it needs to, on today's rates.</p>
+        </div>
+        <div class="plain-card stream-detail">
+          <h3>Maintenance</h3>
+          <p>Fewer service calls and fewer emergency repairs when equipment runs the way it should.</p>
+        </div>
+        <div class="plain-card stream-detail">
+          <h3>Equipment life</h3>
+          <p>Longer equipment life means fewer emergency replacements landing on the capital plan at once.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 5. Financing -->
-  <section class="band--alt band" id="financing">
+  <!-- 3. Monthly cash flow comparison -->
+  <section class="band--alt band" id="cashflow">
     <div class="wrap narrow">
-      <p class="label">Financing</p>
-      <h2>Paid for by the savings it creates. Nothing added to the capital plan.</h2>
-      <div class="grid grid--2">
-        <div class="plain-card">
-          <h3>Savings-funded, off the town's balance sheet</h3>
-          <p>The project is financed against the energy savings it generates, not against Cardston's general revenue or capital budget. There is no upfront capital outlay from the town and no new debt on the town's books.</p>
-        </div>
-        <div class="plain-card">
-          <h3>Pooled across several buildings</h3>
-          <p>Bundling the arena, the pool, the town office, and water/wastewater into one project is what makes the numbers work at Cardston's scale, clearing minimum project sizes that any single small building usually can't reach alone.</p>
-        </div>
-        <div class="plain-card">
-          <h3>Grants and rebates stacked and handled for the town</h3>
-          <p>Where they're available &mdash; through programs like the Municipal Climate Change Action Centre (MCCAC), the Federation of Canadian Municipalities' Green Municipal Fund, or the Canada Infrastructure Bank's building retrofit programs &mdash; we identify, apply for, and stack them into the financing so the town doesn't have to run a grant application on its own.</p>
-        </div>
-        <div class="plain-card">
-          <h3>Timing matters</h3>
-          <p>Provincial recreation-facility retrofit grants have tightened over the last two years, with the MCCAC's dedicated recreation program now closed to new applications and its general conservation program closing its most recent intake in spring 2026. Financing the project from its own savings means Cardston isn't waiting on the next grant window to open.</p>
-        </div>
+      <p class="label">The cash flow</p>
+      <h2>Savings cover the project, with money left over.</h2>
+      <p>Illustrative numbers only, to be confirmed once we see Cardston's own bills.</p>
+    </div>
+    <div class="wrap" style="margin-top:1.5rem;">
+      <div class="chartcard">
+        <svg class="streams-svg" viewBox="0 0 680 320" role="img" aria-label="Illustrative monthly cash flow: today's overspending compared with the project in place, where savings cover the project payment and leave money over">
+          <line x1="40" y1="270" x2="640" y2="270" stroke="var(--rule)" stroke-width="1"/>
+
+          <rect x="110" y="80" width="140" height="190" rx="6" fill="var(--graphite)" opacity="0.55"/>
+          <text x="180" y="65" text-anchor="middle" fill="var(--body-c)" font-family="var(--font-sans)" font-weight="700" font-size="15">Today</text>
+          <text x="180" y="175" text-anchor="middle" fill="var(--panel-ink)" font-family="var(--font-mono)" font-size="13">Money lost to</text>
+          <text x="180" y="193" text-anchor="middle" fill="var(--panel-ink)" font-family="var(--font-mono)" font-size="13">overspending</text>
+
+          <rect x="430" y="150" width="140" height="120" rx="6" fill="var(--graphite)"/>
+          <text x="500" y="200" text-anchor="middle" fill="var(--panel-ink)" font-family="var(--font-mono)" font-size="13">Project</text>
+          <text x="500" y="218" text-anchor="middle" fill="var(--panel-ink)" font-family="var(--font-mono)" font-size="13">payment</text>
+          <rect x="430" y="80" width="140" height="70" rx="6" fill="var(--amber)"/>
+          <text x="500" y="110" text-anchor="middle" fill="var(--amber-ink)" font-family="var(--font-sans)" font-weight="700" font-size="14">Money kept</text>
+          <text x="500" y="130" text-anchor="middle" fill="var(--amber-ink)" font-family="var(--font-mono)" font-size="13">by the town</text>
+          <text x="500" y="65" text-anchor="middle" fill="var(--body-c)" font-family="var(--font-sans)" font-weight="700" font-size="15">With the project</text>
+        </svg>
+        <p class="fine" style="margin-top:1.25rem;">Illustrative only. The savings shown as &ldquo;money lost to overspending&rdquo; today become, once the project is running, a payment covering the upgrade plus money the town keeps. Real figures replace this once we see Cardston's interval data and bills.</p>
       </div>
-      <p class="fine" id="notes">Grant program status and figures verified as of September 2026; see the <a href="#sources">sources listed below</a> for every source and the programs' current eligibility rules, which change over time.</p>
     </div>
   </section>
 
-  <!-- 6. What the town provides -->
-  <section class="band" id="provides">
+  <!-- 4. The plan: three steps -->
+  <section class="band" id="plan">
     <div class="wrap narrow">
-      <p class="label">What we need from Cardston</p>
-      <h2>Low friction. Three things, none of them a budget ask.</h2>
+      <p class="label">The plan</p>
+      <h2>Three steps. Nothing invented, everything measured.</h2>
       <ol class="steps">
         <li>
-          <p class="step-num mono">01</p>
-          <h3>A signed data authorization</h3>
-          <p>A short form authorizing release of twelve months of interval electricity data from Cardston's own electrical utility records. This is the single most useful thing the town can provide, and it costs nothing.</p>
+          <h3>Share your data</h3>
+          <p>A signed authorization for a year of interval electricity data, plus recent utility bills. No site visit required to start.</p>
         </li>
         <li>
-          <p class="step-num mono">02</p>
-          <h3>Recent utility bills</h3>
-          <p>Copies of the last twelve to twenty-four months of electricity and gas bills for the arena, pool, town office, and water/wastewater accounts.</p>
+          <h3>Get your plan</h3>
+          <p>We build a real, measured plan from Cardston's own numbers, not a sales estimate. The town sees the numbers before anything is signed.</p>
         </li>
         <li>
-          <p class="step-num mono">03</p>
-          <h3>Equipment photos and nameplates, from a phone</h3>
-          <p>Photos of the ice plant compressors, pool heaters, and major HVAC nameplates. No special equipment needed, just a phone walking through each mechanical room.</p>
+          <h3>We handle funding and install</h3>
+          <p>We work the funding options on Cardston's behalf, arrange the financing, and manage the install. The town's job is to say yes.</p>
         </li>
       </ol>
-      <p class="fine">Cardston's own electrical distribution utility, not FortisAlberta, will be the correct source for interval data specific to town-owned meters. We'll confirm the right request with the town directly once we're engaged; see the <a href="#sources">sources listed below</a>.</p>
     </div>
   </section>
 
-  <!-- 7. Who's involved -->
-  <section class="band--alt band" id="who">
+  <!-- 5. Funding & financing: researched, no guarantees -->
+  <section class="band--alt band" id="funding">
     <div class="wrap narrow">
-      <p class="label">Who's involved</p>
-      <h2>One local relationship, one engineering and financing partner.</h2>
-      <div class="grid grid--2">
+      <p class="label">Funding &amp; financing</p>
+      <h2>Programs we'll work to get you into, wherever you qualify.</h2>
+      <p>We check every program below for Cardston. Nothing here is a guarantee or an amount; it's the list of doors we knock on, and their status as of September 2026. Full detail and sources in the <a href="#sources">sources section</a>.</p>
+      <div class="wtable-wrap">
+      <table class="wtable">
+        <thead>
+          <tr><th>Program</th><th>Level</th><th>Status</th><th>Note</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>FCM Green Municipal Fund, Community Buildings Retrofit</td>
+            <td class="fine">Federal, delivered by FCM</td>
+            <td><span class="badge badge--open">Open</span></td>
+            <td class="fine">Rolling intake; all Canadian municipalities eligible except a short excluded list</td>
+          </tr>
+          <tr>
+            <td>NRCan / Housing, Infrastructure and Communities Canada, Green and Inclusive Community Buildings</td>
+            <td class="fine">Federal</td>
+            <td><span class="badge badge--closed">Closed</span></td>
+            <td class="fine">Current intake closed; program runs to 2029, we watch for the next round</td>
+          </tr>
+          <tr>
+            <td>Canada Infrastructure Bank, Building Retrofits Initiative</td>
+            <td class="fine">Federal</td>
+            <td><span class="badge badge--open">Open, via lenders</span></td>
+            <td class="fine">Delivered through financial partners; best fit for a larger pooled project</td>
+          </tr>
+          <tr>
+            <td>Canada Community-Building Fund (now Building Communities Strong Fund, Community Stream)</td>
+            <td class="fine">Federal, flows through Alberta</td>
+            <td><span class="badge badge--own">Town's own allocation</span></td>
+            <td class="fine">Cardston already receives this yearly; council can choose to direct part of it here</td>
+          </tr>
+          <tr>
+            <td>Alberta Local Government Fiscal Framework</td>
+            <td class="fine">Alberta</td>
+            <td><span class="badge badge--own">Town's own allocation</span></td>
+            <td class="fine">Formula funding Cardston already receives; usable on infrastructure priorities within program rules</td>
+          </tr>
+          <tr>
+            <td>MCCAC programs (Community Energy Conservation, Municipal Electricity Generation)</td>
+            <td class="fine">Alberta</td>
+            <td><span class="badge badge--closed">Winding down</span></td>
+            <td class="fine">MCCAC is being wound down province wide; existing signed agreements proceed, new intakes are limited</td>
+          </tr>
+          <tr>
+            <td>Emissions Reduction Alberta</td>
+            <td class="fine">Alberta</td>
+            <td><span class="badge badge--closed">Not a fit today</span></td>
+            <td class="fine">Current calls focus on industrial and technology projects, not small municipal buildings; we monitor for new calls</td>
+          </tr>
+          <tr>
+            <td>Cardston's own municipal electric utility</td>
+            <td class="fine">Local</td>
+            <td><span class="badge badge--own">To confirm</span></td>
+            <td class="fine">Cardston runs its own distribution utility rather than FortisAlberta; we'll check directly for any utility side program</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="fine">Towns don't pay income tax, so federal tax credits generally don't apply to Cardston directly. Where a private financing partner sits inside the structure, a credit like the federal Clean Technology Investment Tax Credit could apply to that partner and show up as better pricing to the town, never as a credit Cardston claims itself.</p>
+
+      <h3 style="margin-top:2.5rem; font-size:var(--step-1);">Financing, if no grant covers the whole project</h3>
+      <div class="grid grid--2" style="margin-top:1.25rem;">
         <div class="plain-card">
-          <h3>Big Rock Power / Manitou Energy</h3>
-          <p>The local relationship with the Town of Cardston. First call, first point of trust, and the ones who stay in the loop through the project.</p>
+          <h3>Savings-funded financing</h3>
+          <p>The project is paid down from the energy and maintenance savings it creates. Structure and treatment on Cardston's books are confirmed with the town's own finance team before anything is signed.</p>
         </div>
         <div class="plain-card">
-          <h3>Energy Plus</h3>
-          <p>Engineering diagnostics, project financing, and incentive filing. Energy Plus leads the technical work and carries the financing; the local partner leads the relationship.</p>
+          <h3>Paying cash</h3>
+          <p>If Cardston prefers to pay for the project directly, that works too. Either way, the numbers above show the same money moving.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 8. The ask -->
-  <section class="band" id="ask">
+  <!-- 6. Your diagnostician -->
+  <section class="band" id="diagnostician">
+    <div class="wrap narrow">
+      <p class="label">Your diagnostician</p>
+      <h2>Cliff Suljak reviews the numbers before anyone touches equipment.</h2>
+    </div>
+    <div class="wrap" style="margin-top:1.5rem;">
+      <div class="grid grid--2">
+        <div class="plain-card">
+          <div class="photo" style="margin-bottom:1rem;">
+            <img src="assets/img/cliff-lab.jpg" alt="Cliff Suljak, Chief Technical Engineer, in a materials testing laboratory" loading="lazy">
+          </div>
+          <p class="fine">Cliff Suljak &middot; Chief Technical Engineer</p>
+        </div>
+        <div class="plain-card">
+          <p>When the Department of Energy and the Department of Defense needed measurements right the first time, Sandia National Laboratories did not put the contract out to bid. They handed it to Cliff Suljak.</p>
+          <p>Cliff built the quality control program for a $600 million utility efficiency program: metallurgical lab, nondestructive testing, failure analysis, predictive vibration monitoring. He designs the measurement before anyone touches a unit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. The ask -->
+  <section class="band--alt band" id="ask">
     <div class="wrap narrow">
       <p class="label">Next step</p>
       <h2>One call to see if the numbers pencil out.</h2>
@@ -343,28 +365,33 @@
         <a class="textlink" href="mailto:dan@yourenergyplus.com">Email</a>
       </div>
       <p class="fine" style="margin-top:1.25rem;">Daniel Gutierrez &middot; Energy Plus &middot; (864) 777-0688</p>
-      <p>Prepared for Big Rock Power and Manitou Energy to share with the Town of Cardston.</p>
+      <p>Prepared by Big Rock Power in partnership with Energy Plus, to share with the Town of Cardston.</p>
     </div>
   </section>
 
-  <!-- 9. Sources -->
-  <section class="band--alt band" id="sources">
+  <!-- 8. Sources -->
+  <section class="band" id="sources">
     <div class="wrap narrow">
       <p class="label">Sources</p>
       <h2 style="font-size:var(--step-2);">Where the facts on this page come from.</h2>
-      <p>Every verified fact above is sourced below. Figures marked illustrative in the numbers section are modeled from these published benchmarks, not from Cardston's own bills, which we have not seen.</p>
+      <p>Every verified fact above is sourced below. Figures marked illustrative in the cash flow section are modeled examples, not a reading of Cardston's own bills, which we have not seen.</p>
       <ul class="fine" style="list-style:disc; padding-left:1.3rem; line-height:1.9;">
-        <li>Population, 2021 Census of Population &mdash; Statistics Canada: <a href="https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=Cardston&DGUIDlist=2021A00054803004&GENDERlist=1,2,3&STATISTIClist=1&HEADERlist=0">statcan.gc.ca</a></li>
-        <li>Cardston recreational facilities (arena, pool, town office) &mdash; Town of Cardston: <a href="https://www.cardston.ca/residents/recreation/recreational-facilities">cardston.ca/recreation</a></li>
-        <li>Cardston owns and operates its own electrical distribution system (not FortisAlberta) &mdash; Town of Cardston: <a href="https://www.cardston.ca/residents/municipal-services/electrical">cardston.ca/electrical</a></li>
-        <li>Cardston's own 85% demand ratchet on Small/Medium Commercial rates &mdash; Town of Cardston Bylaw #1649, Distribution Tariff Rate Schedule (effective July 1, 2026): <a href="https://www.cardston.ca/public/download/files/194885">cardston.ca bylaw PDF</a></li>
-        <li>How Alberta demand ratchets work generally &mdash; Utilities Consumer Advocate: <a href="https://ucahelps.alberta.ca/understanding-demand-charges.aspx">ucahelps.alberta.ca</a></li>
-        <li>Alberta's deregulated retail market and default rate &mdash; EnergyRates.ca: <a href="https://energyrates.ca/alberta/regulated-rate-option-rro/">energyrates.ca</a></li>
-        <li>Municipal Climate Change Action Centre (MCCAC) programs and current status: <a href="https://mccac.ca/programs/">mccac.ca/programs</a></li>
-        <li>FCM Green Municipal Fund, Community Buildings Retrofit initiative: <a href="https://greenmunicipalfund.ca/community-buildings-retrofit-initiative">greenmunicipalfund.ca</a></li>
+        <li>Population, 2021 Census of Population, Statistics Canada: <a href="https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=Cardston&DGUIDlist=2021A00054803004&GENDERlist=1,2,3&STATISTIClist=1&HEADERlist=0">statcan.gc.ca</a></li>
+        <li>Cardston recreational facilities (arena, pool, town office), Town of Cardston: <a href="https://www.cardston.ca/residents/recreation/recreational-facilities">cardston.ca/recreation</a></li>
+        <li>Cardston owns and operates its own electrical distribution system, not FortisAlberta, Town of Cardston: <a href="https://www.cardston.ca/residents/municipal-services/electrical">cardston.ca/electrical</a></li>
+        <li>Cardston's own demand ratchet on Small/Medium Commercial rates, Town of Cardston Bylaw #1649, Distribution Tariff Rate Schedule (effective July 1, 2026): <a href="https://www.cardston.ca/public/download/files/194885">cardston.ca bylaw PDF</a></li>
+        <li>How Alberta demand ratchets work generally, Utilities Consumer Advocate: <a href="https://ucahelps.alberta.ca/understanding-demand-charges.aspx">ucahelps.alberta.ca</a></li>
+        <li>Alberta's deregulated retail market and default rate, EnergyRates.ca: <a href="https://energyrates.ca/alberta/regulated-rate-option-rro/">energyrates.ca</a></li>
+        <li>FCM Green Municipal Fund, Community Buildings Retrofit initiative, status and eligibility: <a href="https://greenmunicipalfund.ca/community-buildings-retrofit-initiative">greenmunicipalfund.ca</a></li>
+        <li>NRCan / Housing, Infrastructure and Communities Canada, Green and Inclusive Community Buildings program status: <a href="https://housing-infrastructure.canada.ca/gicb-bcvi/index-eng.html">housing-infrastructure.canada.ca</a></li>
         <li>Canada Infrastructure Bank, Building Retrofits Initiative: <a href="https://cib-bic.ca/en/building-retrofits-initiative/">cib-bic.ca</a></li>
+        <li>Canada Community-Building Fund / Building Communities Strong Fund, Alberta: <a href="https://www.alberta.ca/canada-community-building-fund">alberta.ca</a></li>
+        <li>Alberta Local Government Fiscal Framework, capital funding: <a href="https://www.alberta.ca/local-government-fiscal-framework-capital-funding">alberta.ca</a></li>
+        <li>MCCAC wind-down announcement: <a href="https://mccac.ca/2026/07/17/the-mccac-is-winding-down-after-17-successful-years/">mccac.ca</a></li>
+        <li>Emissions Reduction Alberta, current funding calls: <a href="https://www.eralberta.ca/apply-for-funding/">eralberta.ca</a></li>
         <li>NRCan ice rink / arena energy benchmarking: <a href="https://natural-resources.canada.ca/energy-efficiency/energy-star/energy-benchmarking-data-snapshot-ice-rinks">natural-resources.canada.ca</a></li>
-        <li>Ice-plant-to-pool heat recovery case studies (Okotoks AB, Chilliwack BC, Hope BC): <a href="https://www.bchydro.com/news/conservation/2023/chilliwack-rink-heats-pools.html">bchydro.com</a> &middot; <a href="https://www.prismengineering.com/projects/hope-recreation-centre-heat-recovery-system/">prismengineering.com</a></li>
+        <li>Ice plant to pool heat recovery case studies (Okotoks AB, Chilliwack BC, Hope BC): <a href="https://www.bchydro.com/news/conservation/2023/chilliwack-rink-heats-pools.html">bchydro.com</a> &middot; <a href="https://www.prismengineering.com/projects/hope-recreation-centre-heat-recovery-system/">prismengineering.com</a></li>
+        <li>Big Rock Power, company background: <a href="https://www.bigrockpower.ca/">bigrockpower.ca</a></li>
       </ul>
       <p class="fine">A complete source list with every assumption noted is also kept on file with Energy Plus and can be provided on request.</p>
     </div>
@@ -374,7 +401,7 @@
 
 <footer class="site">
   <div class="wrap narrow">
-    <p>Prepared by Energy Plus in partnership with Big Rock Power and Manitou Energy. Private and confidential, prepared as an illustrative first draft for partner review. All facility and savings figures are estimates pending Cardston's own interval data; see the sources listed above for sources and assumptions.</p>
+    <p>Prepared by Big Rock Power in partnership with Energy Plus. Private and confidential, prepared as an illustrative first draft for partner review. All facility and savings figures are estimates pending Cardston's own interval data; see the sources listed above for sources and assumptions.</p>
   </div>
 </footer>
 
